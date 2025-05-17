@@ -104,11 +104,18 @@ export class UserInterface {
 
                 //TODO Check if it's a fibonacci number
 
-                //TODO Prompt for next number
+                // Prompt for next number
+                this.promptNextNumber();
             } else {
                 console.log('Invalid input. Please enter a valid number.');
                 //TODO Prompt for next number
             }
         }
+    }
+
+    private promptNextNumber() {
+        this.rl.question('Please enter the next number: ', (input) => {
+            this.handleInput(input);
+        });
     }
 }
