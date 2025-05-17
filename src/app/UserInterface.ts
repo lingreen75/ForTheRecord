@@ -58,9 +58,57 @@ export class UserInterface {
                     }
                 }, seconds * 1000);
 
-                //TODO  Start asking for numbers....
+                // Start asking for numbers
+                this.promptFirstNumber();
             }
         });
 
+    }
+
+    /**
+     * Prompt for the first number
+     */
+    private promptFirstNumber() {
+        if (!this.isRunning) return;
+
+        this.rl.question('Please enter the first number: ', (input) => {
+            this.handleInput(input);
+        });
+    }
+
+    /**
+     * Handle user input
+     * @param input The user's input
+     */
+    private handleInput(input: string) {
+        input = input.trim().toLowerCase();
+
+        // Check for special commands
+        if (input === 'halt') {
+            this.isRunning = false;
+            console.log('Program halted. Type "resume" to continue.');
+        } else if (input === 'quit') {
+
+            console.log('Exiting program. Goodbye!');
+            this.cleanup();
+            process.exit(0);
+            // return;
+        }
+
+        // If program is running, process the number
+        if (this.isRunning) {
+            const num = parseFloat(input);
+
+            if (!isNaN(num)) {
+                //TODO Add to tracker
+
+                //TODO Check if it's a fibonacci number
+
+                //TODO Prompt for next number
+            } else {
+                console.log('Invalid input. Please enter a valid number.');
+                //TODO Prompt for next number
+            }
+        }
     }
 }
