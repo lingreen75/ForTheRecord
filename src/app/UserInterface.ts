@@ -107,6 +107,8 @@ export class UserInterface {
             return;
 
         } else if (input === 'quit') {
+            console.log('\n--- Final Statistics ---');
+            this.display.displayStats();
 
             console.log('Exiting program. Goodbye!');
             this.cleanup();

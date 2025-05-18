@@ -18,9 +18,8 @@ export class StatisticsDisplay {
         if (sortedFrequencies.length === 0) {
             console.log('No numbers entered yet.');
         } else {
-            sortedFrequencies.forEach(([number, frequency]) => {
-                console.log(`${number}: ${frequency}`);
-            });
+            console.log(sortedFrequencies.map(([number, frequency]) =>
+                `${number}:${frequency}`).join(', '));
         }
         console.log('-------------------------------------------\n');
     }

@@ -34,7 +34,13 @@ export class NumberTracker {
             ([numStr, freq]) => [parseFloat(numStr), freq]
         );
 
-        // TODO Sort by frequency (descending) and then by number (descending) if frequencies are equal
+        // Sort by frequency (descending) and then by number (descending) if frequencies are equal
+        entries.sort((a, b) => {
+            if (b[1] !== a[1]) {
+                return b[1] - a[1]; // Sort by frequency (descending)
+            }
+            return b[0] - a[0]; // If frequencies are equal, sort by number (descending)
+        });
 
         return entries;
     }
