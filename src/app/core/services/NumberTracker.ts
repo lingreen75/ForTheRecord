@@ -8,8 +8,6 @@ export class NumberTracker {
      * @param num The number to track
      */
     public addNumber(num: number): void {
-        // console.log("Adding number:" + num);
-
         if (this.frequencies[num]) {
             this.frequencies[num]++;
         } else {
@@ -44,6 +42,4 @@ export class NumberTracker {
 
         return entries;
     }
-
-
 }

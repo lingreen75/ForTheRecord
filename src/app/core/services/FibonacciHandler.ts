@@ -6,7 +6,7 @@ export class FibonacciHandler {
      * @returns An array of Fibonacci numbers
      */
     public generateFibonacciNumbers(count: number): bigint[] {
-        console.log('Generating first ' + count + ' Fibonacci numbers...');
+        console.log('>> Generating first ' + count + ' Fibonacci numbers...');
 
         // Using BigInt to handle large Fibonacci numbers
         const fibArray: bigint[] = [BigInt(1), BigInt(1)]; // Starting with 1, 1
@@ -44,7 +44,6 @@ export class FibonacciHandler {
                 right = mid - 1;
             }
         }
-
         return false;
     }
 }
