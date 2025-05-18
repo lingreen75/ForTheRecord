@@ -8,13 +8,21 @@ export class NumberTracker {
      * @param num The number to track
      */
     public addNumber(num: number): void {
-        // console.log("Adding number:" + num);
+        console.log("Adding number:" + num);
 
         if (this.frequencies[num]) {
             this.frequencies[num]++;
         } else {
             this.frequencies[num] = 1;
         }
+    }
+
+    /**
+     * Get the frequency map
+     * @returns A copy of the current frequency map
+     */
+    public getFrequencies(): NumberFrequencyMap {
+        return { ...this.frequencies };
     }
 
 }

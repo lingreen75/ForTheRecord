@@ -1,14 +1,17 @@
 import * as readline from 'readline';
 import {NumberTracker} from "./core/services/NumberTracker";
+import {StatisticsDisplay} from "./StatisticsDisplay";
 
 export class UserInterface {
     private rl: readline.Interface;
     private timerId: NodeJS.Timeout | null = null;
     private isRunning: boolean = true;
     private tracker: NumberTracker;
+    private display: StatisticsDisplay;
 
-    constructor(tracker: NumberTracker) {
+    constructor(tracker: NumberTracker, display: StatisticsDisplay) {
         this.tracker = tracker;
+        this.display = display;
 
         this.rl = readline.createInterface({
             input: process.stdin,
@@ -56,7 +59,7 @@ export class UserInterface {
                 // Start the interval timer
                 this.timerId = setInterval(() => {
                     if (this.isRunning) {
-                        //TODO display stats...
+                        this.display.displayStats();
                     }
                 }, seconds * 1000);
 
