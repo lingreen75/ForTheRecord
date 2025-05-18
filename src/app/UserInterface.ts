@@ -1,11 +1,14 @@
 import * as readline from 'readline';
+import {NumberTracker} from "./core/services/NumberTracker";
 
 export class UserInterface {
     private rl: readline.Interface;
     private timerId: NodeJS.Timeout | null = null;
     private isRunning: boolean = true;
+    private tracker: NumberTracker;
 
-    constructor() {
+    constructor(tracker: NumberTracker) {
+        this.tracker = tracker;
 
         this.rl = readline.createInterface({
             input: process.stdin,
@@ -23,8 +26,7 @@ export class UserInterface {
      * Start the user interface
      */
     public start(): void {
-        console.log('Started app...');
-
+        console.log('Enter numbers when prompted. Type "halt" to pause, "resume" to continue, or "quit" to exit.');
         this.promptForIntervalDuration();
     }
 
@@ -87,12 +89,25 @@ export class UserInterface {
         if (input === 'halt') {
             this.isRunning = false;
             console.log('Program halted. Type "resume" to continue.');
+
+            // Continue listening for resume command
+            this.rl.question('', (cmd) => {
+                if (cmd.trim().toLowerCase() === 'resume') {
+                    this.isRunning = true;
+                    console.log('Program resumed.');
+                    this.promptNextNumber();
+                } else {
+                    // Keep listening for resume command
+                    this.handleInput(cmd);
+                }
+            });
+            return;
+
         } else if (input === 'quit') {
 
             console.log('Exiting program. Goodbye!');
             this.cleanup();
             process.exit(0);
-            // return;
         }
 
         // If program is running, process the number
@@ -100,7 +115,8 @@ export class UserInterface {
             const num = parseFloat(input);
 
             if (!isNaN(num)) {
-                //TODO Add to tracker
+                // Add to tracker
+                this.tracker.addNumber(num);
 
                 //TODO Check if it's a fibonacci number
 
