@@ -1,6 +1,7 @@
 import * as readline from 'readline';
 import {NumberTracker} from "./core/services/NumberTracker";
 import {StatisticsDisplay} from "./StatisticsDisplay";
+import {FibonacciHandler} from "./core/services/FibonacciHandler";
 
 export class UserInterface {
     private rl: readline.Interface;
@@ -8,10 +9,13 @@ export class UserInterface {
     private isRunning: boolean = true;
     private tracker: NumberTracker;
     private display: StatisticsDisplay;
+    private fibonacciHandler: FibonacciHandler;
+    private fibArray: bigint[] = [];
 
-    constructor(tracker: NumberTracker, display: StatisticsDisplay) {
+    constructor(tracker: NumberTracker, display: StatisticsDisplay, fibonacciHandler: FibonacciHandler) {
         this.tracker = tracker;
         this.display = display;
+        this.fibonacciHandler = fibonacciHandler;
 
         this.rl = readline.createInterface({
             input: process.stdin,
@@ -29,19 +33,16 @@ export class UserInterface {
      * Start the user interface
      */
     public start(): void {
+        this.initializeApp();
         console.log('Enter numbers when prompted. Type "halt" to pause, "resume" to continue, or "quit" to exit.');
         this.promptForIntervalDuration();
     }
 
-    /**
-     * Clean up resources
-     */
-    private cleanup(): void {
-        if (this.timerId) {
-            clearInterval(this.timerId);
-        }
-        this.rl.close();
+    private initializeApp(): void {
+        //generate fibonacci number array containing first 1000 numbers
+        this.fibArray = this.fibonacciHandler.generateFibonacciNumbers(1000);
     }
+
 
     /**
      * Prompt for interval duration
@@ -123,7 +124,10 @@ export class UserInterface {
                 // Add to tracker
                 this.tracker.addNumber(num);
 
-                //TODO Check if it's a fibonacci number
+                let isFibNumber = this.fibonacciHandler.isInFibonacciSequence(BigInt(num), this.fibArray);
+                if (isFibNumber) {
+                    console.log('FIB');
+                }
 
                 // Prompt for next number
                 this.promptNextNumber();
@@ -134,9 +138,25 @@ export class UserInterface {
         }
     }
 
+
+    /**
+     * Prompt for the next number
+     */
     private promptNextNumber() {
         this.rl.question('Please enter the next number: ', (input) => {
             this.handleInput(input);
         });
     }
+
+
+    /**
+     * Clean up resources
+     */
+    private cleanup(): void {
+        if (this.timerId) {
+            clearInterval(this.timerId);
+        }
+        this.rl.close();
+    }
+
 }
