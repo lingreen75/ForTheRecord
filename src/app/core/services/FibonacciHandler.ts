@@ -22,7 +22,12 @@ export class FibonacciHandler {
         return fibArray;
     }
 
-    // Function to check if a number is in the Fibonacci array
+    /**
+     * Check if a number is in the Fibonacci array
+     * @param number The number to check
+     * @param fibArray The Fibonacci array
+     * @retruns True if the number is in the array, false otherwise
+     */
     public isInFibonacciSequence(number: bigint, fibArray: bigint[]): boolean {
         // Binary search can be used since the array is sorted
         let left = 0;

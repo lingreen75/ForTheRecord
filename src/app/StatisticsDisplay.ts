@@ -11,12 +11,12 @@ export class StatisticsDisplay {
      * Display the current statistics
      */
     public displayStats(): void {
-        console.log('\n--- Number Frequencies (Descending Order) ---');
+        //console.log('\n--- Number Frequencies (Descending Order) ---');
 
         const sortedFrequencies = this.tracker.getSortedFrequencies();
 
         if (sortedFrequencies.length === 0) {
-            console.log('No numbers entered yet.');
+            console.log('>> No numbers entered yet.');
         } else {
             console.log(sortedFrequencies.map(([number, frequency]) =>
                 `${number}:${frequency}`).join(', '));

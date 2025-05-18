@@ -38,6 +38,10 @@ export class UserInterface {
         this.promptForIntervalDuration();
     }
 
+
+    /**
+     * Initialize the app by loading up fibonacci numbers x first 1000
+     */
     private initializeApp(): void {
         //generate fibonacci number array containing first 1000 numbers
         this.fibArray = this.fibonacciHandler.generateFibonacciNumbers(1000);
@@ -90,31 +94,58 @@ export class UserInterface {
         input = input.trim().toLowerCase();
 
         // Check for special commands
-        if (input === 'halt') {
-            this.isRunning = false;
-            console.log('Program halted. Type "resume" to continue.');
-
-            // Continue listening for resume command
-            this.rl.question('', (cmd) => {
-                if (cmd.trim().toLowerCase() === 'resume') {
-                    this.isRunning = true;
-                    console.log('Program resumed.');
-                    this.promptNextNumber();
-                } else {
-                    // Keep listening for resume command
-                    this.handleInput(cmd);
-                }
-            });
-            return;
-
-        } else if (input === 'quit') {
-            console.log('\n--- Final Statistics ---');
-            this.display.displayStats();
-
-            console.log('Exiting program. Goodbye!');
-            this.cleanup();
-            process.exit(0);
+        switch (input) {
+            case 'halt':
+                this.haltProgram();
+                break;
+            case 'quit':
+                this.quitProgram();
+                break;
+            default:
+                this.processNumber(input);
+                break;
         }
+    }
+
+
+    /**
+     * Halt the program
+     */
+    private haltProgram() {
+        this.isRunning = false;
+        console.log('Program halted. Type "resume" to continue.');
+
+        // Continue listening for resume command
+        this.rl.question('', (cmd) => {
+            if (cmd.trim().toLowerCase() === 'resume') {
+                this.isRunning = true;
+                console.log('Program resumed.');
+                this.promptNextNumber();
+            } else {
+                // Keep listening for resume command
+                this.handleInput(cmd);
+            }
+        });
+    }
+
+    /**
+     * Quit the program
+     */
+    private quitProgram() {
+        console.log('\n--- Final Statistics ---');
+        this.display.displayStats();
+
+        console.log('Exiting program. Goodbye!');
+        this.cleanup();
+        process.exit(0);
+    }
+
+    /**
+     * Process a number
+     * @param input The number to process
+     */
+    private processNumber(input: string) {
+        //console.log('Processing number...');
 
         // If program is running, process the number
         if (this.isRunning) {
@@ -158,5 +189,4 @@ export class UserInterface {
         }
         this.rl.close();
     }
-
 }
