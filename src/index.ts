@@ -1,6 +1,6 @@
-import { UserInterface } from './UserInterface';
+import { UserInterface } from './userinterface/UserInterface';
 import { NumberTracker } from './services/NumberTracker';
-import {StatisticsDisplay} from "./StatisticsDisplay";
+import {StatisticsDisplay} from "./services/StatisticsDisplay";
 import {FibonacciHandler} from "./services/FibonacciHandler";
 
 /**

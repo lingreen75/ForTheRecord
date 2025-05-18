@@ -1,4 +1,4 @@
-import {NumberTracker} from "./services/NumberTracker";
+import {NumberTracker} from "./NumberTracker";
 
 export class StatisticsDisplay {
     private tracker: NumberTracker;
