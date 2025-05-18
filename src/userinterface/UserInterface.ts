@@ -113,13 +113,13 @@ export class UserInterface {
      */
     private haltProgram() {
         this.isRunning = false;
-        console.log('>> Program halted. Type "resume" to continue.');
+        console.log('>> Timer halted. Type "resume" to continue.');
 
         // Continue listening for resume command
         this.rl.question('', (cmd) => {
             if (cmd.trim().toLowerCase() === 'resume') {
                 this.isRunning = true;
-                console.log('>> Program resumed.');
+                console.log('>> Timer resumed.');
                 this.promptNextNumber();
             } else {
                 // Keep listening for resume command
@@ -135,7 +135,7 @@ export class UserInterface {
         console.log('\n>> -------------- Final Statistics --------------');
         this.display.displayStats();
         console.log('>> ----------------------------------------------');
-        console.log('\n>> Exiting program. Goodbye!\n');
+        console.log('\n>> Thanks for playing, press any key to exit. \n');
 
         this.cleanup();
         process.exit(0);
