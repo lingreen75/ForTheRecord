@@ -6,10 +6,18 @@ ForTheRecord code test
 * Typescript
 * Node.js
 
-## Technology Stack
+## Integration Points
+
+* N/A
 
 
-## Technology Stack
+## How to Run
+
+* In a terminal window type these commands:
+  * tsc  _(to transpile it)_
+  * node ./dist/index.js  _(to run it)_
+
+
 
 ## Original Specification
 
