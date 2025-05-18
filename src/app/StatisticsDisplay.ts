@@ -1,5 +1,3 @@
-// import { NumberTracker } from './app/core/services/NumberTracker';
-
 import {NumberTracker} from "./core/services/NumberTracker";
 
 export class StatisticsDisplay {
@@ -15,8 +13,15 @@ export class StatisticsDisplay {
     public displayStats(): void {
         console.log('\n--- Number Frequencies (Descending Order) ---');
 
-        console.log("The stats are....")
+        const sortedFrequencies = this.tracker.getSortedFrequencies();
 
+        if (sortedFrequencies.length === 0) {
+            console.log('No numbers entered yet.');
+        } else {
+            sortedFrequencies.forEach(([number, frequency]) => {
+                console.log(`${number}: ${frequency}`);
+            });
+        }
         console.log('-------------------------------------------\n');
     }
 }

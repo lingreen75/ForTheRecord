@@ -25,4 +25,19 @@ export class NumberTracker {
         return { ...this.frequencies };
     }
 
+    /**
+     * Get the frequencies sorted in descending order
+     * @returns Array of [number, frequency] pairs sorted by frequency (desc) then number (desc)
+     */
+    public getSortedFrequencies(): [number, number][] {
+        const entries: [number, number][] = Object.entries(this.frequencies).map(
+            ([numStr, freq]) => [parseFloat(numStr), freq]
+        );
+
+        // TODO Sort by frequency (descending) and then by number (descending) if frequencies are equal
+
+        return entries;
+    }
+
+
 }
