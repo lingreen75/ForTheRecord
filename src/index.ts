@@ -1,7 +1,7 @@
-import { UserInterface } from './app/UserInterface';
-import { NumberTracker } from './app/core/services/NumberTracker';
-import {StatisticsDisplay} from "./app/StatisticsDisplay";
-import {FibonacciHandler} from "./app/core/services/FibonacciHandler";
+import { UserInterface } from './UserInterface';
+import { NumberTracker } from './services/NumberTracker';
+import {StatisticsDisplay} from "./StatisticsDisplay";
+import {FibonacciHandler} from "./services/FibonacciHandler";
 
 /**
  * Main application entry point

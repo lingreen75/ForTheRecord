@@ -1,7 +1,7 @@
 import * as readline from 'readline';
-import {NumberTracker} from "./core/services/NumberTracker";
+import {NumberTracker} from "./services/NumberTracker";
 import {StatisticsDisplay} from "./StatisticsDisplay";
-import {FibonacciHandler} from "./core/services/FibonacciHandler";
+import {FibonacciHandler} from "./services/FibonacciHandler";
 
 export class UserInterface {
     private rl: readline.Interface;
